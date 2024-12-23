@@ -1,0 +1,119 @@
+﻿@model forumbar.Models.USER_INFO
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var section = Request.QueryString["section"] ?? "posts";
+}
+
+<section>
+    <div class="feature-photo">
+        <figure><img src="~/images/resources/timeline-1.jpg" alt=""></figure>
+        <div class="container-fluid">
+            <div class="row merged">
+                <div class="col-lg-2 col-sm-3">
+                    <div class="user-avatar">
+                        <figure>
+                            <img src="~/images/resources/@Model.Avatar" alt="">
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-sm-9">
+                    <div class="timeline-info">
+                        <ul>
+                            <li class="admin-name">
+                                <h5>@Model.FullName</h5>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("UserProfile", new { section = "personal-info" })" class="@(section == "personal-info" ? "active" : "")" title="" data-ripple="">Personal Information</a>
+                                <a href="@Url.Action("UserProfile", new { section = "posts" })" class="@(section == "posts" ? "active" : "")" title="" data-ripple="">Post</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (section == "personal-info")
+{
+    <section id="personal-info-section" style="margin-top: 30px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10" style="margin-left:30px">
+                    <div class="forum-warper" style="margin-left: 30px;">
+                            <a class="addnewforum" href="@Url.Action("Edit", new { id = Model.IdUser })" title="" style="margin-left:150px"><i class="fa fa-plus"></i> Edit</a>
+                        </div>
+                    <div class="row" id="page-contents">
+                        <div class="col-lg-12" style="margin-left:10px">
+                            <p><strong>Email:</strong> @Model.Email</p>
+                            <p><strong>Phone:</strong> @Model.Phone</p>
+                            <p><strong>Address:</strong> @Model.Address</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else if (section == "posts")
+{
+    <section id="posts-section" style="margin-top: 30px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10" style="margin-left:30px">
+                    <div class="row" id="page-contents">
+                        <div class="col-lg-12" style="margin-left:10px">
+                            <div class="forum-warper" style="margin-left: 30px;">
+                                <a class="addnewforum" href="@Url.Action("Create", "BAIVIETs")" title="" style="margin-left:150px"><i class="fa fa-plus"></i> Add New</a>
+                            </div>
+                            <div class="forum-open">
+                                <h5 class="" style="margin-left:150px"><i class="fa fa-star"></i> Asset for creating a beautiful website</h5>
+                                <table class="table table-responsive" style="margin-left:150px">
+                                    <thead>
+                                        <tr>
+                                            <th>Posts</th>
+                                            <th>Post Date</th>
+                                            <th>Comments</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.BAIVIETs != null && Model.BAIVIETs.Any())
+                                        {
+                                            <ul>
+                                                @foreach (var post in Model.BAIVIETs)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <h4>@post.TieuDe</h4>
+                                                    </td>
+                                                    <td class="date-n-reply">
+                                                        <p>Posted on: @post.ThoiGianDang.ToString("dd/MM/yyyy")</p>
+                                                        <a href="@Url.Action("Details", "BAIVIETs", new { id = post.IdBaiViet })" class="dropdown" title="Details"> Details</a>
+                                                        <a href="@Url.Action("Edit", "BAIVIETs", new { id = post.IdBaiViet })" class="dropdown" title="Details"> Edit</a>
+                                                    </td>
+                                                    <td>
+                                                        <span class="coments">
+                                                            <i class="fa fa-comments"></i>
+                                                            <a title="">@post.BINHLUANs.Count()</a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <p>You currently do not have any articles.</p>
+                                            }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

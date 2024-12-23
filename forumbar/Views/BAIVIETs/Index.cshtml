@@ -1,0 +1,73 @@
+﻿@model IEnumerable<forumbar.Models.BAIVIET>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<section>
+    <div style="margin-top: 30px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10" style="margin-left:30px">
+                    <div class="row" id="page-contents">
+                        <div class="col-lg-12" style="margin-left:10px">
+                            <div class="forum-warper" style="margin-left: 30px;">
+                                <div class="post-filter-sec">
+                                    @using (Html.BeginForm("Search", "BaiViets", FormMethod.Get))
+                                    {
+                                        <input type="text" name="searchTerm" placeholder="Search post" value="@Request.QueryString["searchTerm"]" />
+                                        <button type="submit"><i class="ti-search"></i></button>
+                                    }
+                                    <div class="purify">
+                                        <span>filter by</span>
+                                        <select onchange="location = this.value;">
+                                            <option value="@Url.Action("Index", "BAIVIETs", new { sortOrder = "asc" })" @(ViewBag.SortOrder == "asc" ? "selected" : "")>Ascending A-Z</option>
+                                            <option value="@Url.Action("Index", "BAIVIETs", new { sortOrder = "desc" })" @(ViewBag.SortOrder == "desc" ? "selected" : "")>Descending Z-A</option>
+                                            <option value="@Url.Action("Index", "BAIVIETs", new { sortOrder = "date_desc" })" @(ViewBag.SortOrder == "date_desc" ? "selected" : "")>Descending (date)</option>
+                                            <option value="@Url.Action("Index", "BAIVIETs", new { sortOrder = "date_asc" })" @(ViewBag.SortOrder == "date_asc" ? "selected" : "")>Ascending (date)</option>
+                                        </select>
+                                        <a href="#" title="">purify</a>
+                                    </div>
+                                </div>
+                                <a class="addnewforum" href="@Url.Action("Create")" title="" style="margin-left:150px"><i class="fa fa-plus"></i> Add New</a>
+                            </div>
+                            <div class="forum-open">
+                                <h5 class="" style="margin-left:150px"><i class="fa fa-star"></i> Asset for creating a beautiful website</h5>
+                                <table class="table table-responsive" style="margin-left:150px">
+                                    <thead>
+                                        <tr>
+                                            <th>Author</th>
+                                            <th>Post Date</th>
+                                            <th>Posts</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td class="topic-data">
+                                                <img src="~/images/resources/@Html.DisplayFor(modelItem => item.USER_INFO.Avatar)" style="width: 50px; height: 50px" /><br>
+                                                @Html.DisplayFor(modelItem => item.USER_INFO.FullName)
+                                            </td>
+                                            <td class="date-n-reply">
+                                                @Html.DisplayFor(modelItem => item.ThoiGianDang)
+                                                @Html.ActionLink("Details", "Details", new { id = item.IdBaiViet })
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TieuDe)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

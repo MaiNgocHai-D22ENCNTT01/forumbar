@@ -1,0 +1,37 @@
+﻿@model IEnumerable<forumbar.Models.BINHLUAN>
+
+@{
+    ViewBag.Title = "Quản lý bình luận";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách bình luận</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Comment Content</th>
+            <th>Author</th>
+            <th>Post</th>
+            <th>Comment Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NoiDung</td>
+                <td>@item.USER_INFO.UserName</td>
+                <td>@item.BAIVIET.TieuDe</td>
+                <td>@item.ThoiGianBinhLuan.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "BinhLuan", new { id = item.IdBinhLuan }, FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này?')">Xóa</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

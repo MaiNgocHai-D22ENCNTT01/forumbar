@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22b310668159422b8f21a7156e8bfe79" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="QuanBartender214Model.ACTIVITY_LOG" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.BAIVIET" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.BINHLUAN" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.CHUDE" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.CTDonHang" Width="1.5" PointX="7.5" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.DANHMUCSP" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.DISCOUNT" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.DONHANG" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.GIA" Width="1.5" PointX="8.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.ORDER_HISTORY" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.PRODUCT_REVIEWS" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.SANPHAM" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.USER_INFO" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.USERTYPE" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanBartender214Model.YEUTHICH" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="QuanBartender214Model.FK__ACTIVITY___IdUse__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__BAIVIET__IdChuDe__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__BAIVIET__IdUser__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__BINHLUAN__IdBaiV__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__YEUTHICH__IdBaiV__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__BINHLUAN__IdUser__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__CTDonHang__MaDH__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__CTDonHang__MaSP__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__SANPHAM__MaDM__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__DONHANG__IdUser__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__ORDER_HIST__MaDH__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__GIA__MaSP__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__PRODUCT_R__IdUse__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__PRODUCT_RE__MaSP__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__USER_INFO__IdTyp__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.FK__YEUTHICH__IdUser__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanBartender214Model.PRODUCT_DISCOUNTS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanBartender214Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

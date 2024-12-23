@@ -1,0 +1,78 @@
+﻿@model List<Bartender212.Controllers.CartController.GioHangItem>
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 class="text-center my-4">Giỏ Hàng</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container">
+        <!-- Header Table -->
+        <div class="row border-bottom pb-2 mb-3 text-center fw-bold">
+            <div class="col-md-5">Tên Sản Phẩm</div>
+            <div class="col-md-2">Đơn Giá</div>
+            <div class="col-md-2">Số Lượng</div>
+            <div class="col-md-2">Thành Tiền</div>
+            <div class="col-md-1">Hành Động</div>
+        </div>
+
+        <!-- Danh sách sản phẩm -->
+        @foreach (var item in Model)
+        {
+            <div class="row mb-3 align-items-center text-center">
+                <div class="col-md-5 text-start">
+                    <div class="d-flex align-items-center">
+                        <img src="@Url.Content($"~/images/{item.HinhAnh}")" alt="@item.TenSP" class="rounded" style="height: 60px; width: auto; margin-right: 10px;">
+                        <span>@item.TenSP</span>
+                    </div>
+                </div>
+                <div class="col-md-2">@item.Gia.ToString("N0") VNĐ</div>
+                <div class="col-md-2">@item.SoLuong</div>
+                <div class="col-md-2">@item.ThanhTien.ToString("N0") VNĐ</div>
+                <div class="col-md-1">
+                    <form action="/Cart/RemoveFromCart" method="post" class="d-inline">
+                        <input type="hidden" name="productId" value="@item.MaSP" />
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i> Xóa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <!-- Footer Table -->
+        <div class="row border-top pt-3 mt-3 align-items-center">
+            <div class="col-md-6 text-start">
+                <form action="@Url.Action("Index", "Bartender")" method="get">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fa fa-arrow-left"></i> Tiếp tục mua hàng
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-6 text-end">
+                <h5 class="mb-3">Tổng cộng: <span class="text-danger">@Model.Sum(item => item.ThanhTien).ToString("N0") VNĐ</span></h5>
+                <div>
+                    <a href="@Url.Action("Checkout", "Cart")" class="btn btn-primary">
+                        <i class="fa fa-check-circle"></i> Thanh toán
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center" role="alert">
+        Giỏ hàng của bạn đang trống.
+    </div>
+    <div class="text-center">
+        <form action="@Url.Action("Index", "Bartender")" method="get">
+            <button type="submit" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Tiếp tục mua sắm
+            </button>
+        </form>
+    </div>
+}

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<forumbar.Models.CHUDE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách chủ đề</h2>
+
+<a href="@Url.Action("Create", "ChuDe")" class="btn btn-primary mb-3">Tạo chủ đề mới</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Topic Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenChuDe</td>
+                <td>@item.MoTa</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "ChuDe", new { id = item.IdChuDe }, FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa chủ đề này?')">Xóa</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

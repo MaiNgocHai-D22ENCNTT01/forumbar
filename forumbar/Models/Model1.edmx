@@ -1,0 +1,1220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanBartender214Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTIVITY_LOG">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="IdLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="Activity" Type="nvarchar" MaxLength="200" />
+          <Property Name="ActivityTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BAIVIET">
+          <Key>
+            <PropertyRef Name="IdBaiViet" />
+          </Key>
+          <Property Name="IdBaiViet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThoiGianDang" Type="datetime" Nullable="false" />
+          <Property Name="Anh" Type="nvarchar" MaxLength="250" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="IdChuDe" Type="int" />
+        </EntityType>
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="IdBinhLuan" />
+          </Key>
+          <Property Name="IdBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ThoiGianBinhLuan" Type="datetime" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="IdBaiViet" Type="int" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="IdChuDe" />
+          </Key>
+          <Property Name="IdChuDe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenChuDe" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CTDonHang">
+          <Key>
+            <PropertyRef Name="MaDH" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDH" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DANHMUCSP">
+          <Key>
+            <PropertyRef Name="MaDM" />
+          </Key>
+          <Property Name="MaDM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenDM" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISCOUNTS">
+          <Key>
+            <PropertyRef Name="IdDiscount" />
+          </Key>
+          <Property Name="IdDiscount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DONHANG">
+          <Key>
+            <PropertyRef Name="MaDH" />
+          </Key>
+          <Property Name="MaDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayDat" Type="date" Nullable="false" />
+          <Property Name="NgayGiao" Type="date" />
+          <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="15" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="20" />
+          <Property Name="DaThanhToan" Type="bit" />
+          <Property Name="IdUser" Type="int" />
+        </EntityType>
+        <EntityType Name="GIA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GiaBan" Type="int" Nullable="false" />
+          <Property Name="NgayBatDau" Type="datetime" Nullable="false" />
+          <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
+          <Property Name="MaSP" Type="int" />
+        </EntityType>
+        <EntityType Name="ORDER_HISTORY">
+          <Key>
+            <PropertyRef Name="IdHistory" />
+          </Key>
+          <Property Name="IdHistory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaDH" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="ChangeTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT_DISCOUNTS">
+          <Key>
+            <PropertyRef Name="IdDiscount" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="IdDiscount" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT_REVIEWS">
+          <Key>
+            <PropertyRef Name="IdReview" />
+          </Key>
+          <Property Name="IdReview" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaSP" Type="int" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Review" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReviewDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GiaGoc" Type="int" Nullable="false" />
+          <Property Name="SLTon" Type="int" Nullable="false" />
+          <Property Name="MaDM" Type="int" />
+          <Property Name="Anh" Type="nvarchar" MaxLength="250" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USER_INFO">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdType" Type="int" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="USERTYPE">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YEUTHICH">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdBaiViet" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdBaiViet" Type="int" Nullable="false" />
+          <Property Name="ThoiGianYeuThich" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ACTIVITY___IdUse__36B12243">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ACTIVITY_LOG" Type="Self.ACTIVITY_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="ACTIVITY_LOG">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__IdChuDe__29572725">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="IdChuDe" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="IdChuDe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__IdUser__286302EC">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__IdBaiV__2E1BDC42">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="IdBaiViet" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__IdUser__2D27B809">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDonHang__MaDH__21B6055D">
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CTDonHang" Type="Self.CTDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONHANG">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="CTDonHang">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDonHang__MaSP__22AA2996">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CTDonHang" Type="Self.CTDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="CTDonHang">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONHANG__IdUser__1ED998B2">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GIA__MaSP__1B0907CE">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GIA" Type="Self.GIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="GIA">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_HIST__MaDH__3A81B327">
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ORDER_HISTORY" Type="Self.ORDER_HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONHANG">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="ORDER_HISTORY">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_D__IdDis__3F466844">
+          <End Role="DISCOUNTS" Type="Self.DISCOUNTS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT_DISCOUNTS" Type="Self.PRODUCT_DISCOUNTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCOUNTS">
+              <PropertyRef Name="IdDiscount" />
+            </Principal>
+            <Dependent Role="PRODUCT_DISCOUNTS">
+              <PropertyRef Name="IdDiscount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_DI__MaSP__403A8C7D">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT_DISCOUNTS" Type="Self.PRODUCT_DISCOUNTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="PRODUCT_DISCOUNTS">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_R__IdUse__45F365D3">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="PRODUCT_REVIEWS" Type="Self.PRODUCT_REVIEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="PRODUCT_REVIEWS">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_RE__MaSP__44FF419A">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT_REVIEWS" Type="Self.PRODUCT_REVIEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="PRODUCT_REVIEWS">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SANPHAM__MaDM__182C9B23">
+          <End Role="DANHMUCSP" Type="Self.DANHMUCSP" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUCSP">
+              <PropertyRef Name="MaDM" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MaDM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_INFO__IdTyp__1367E606">
+          <End Role="USERTYPE" Type="Self.USERTYPE" Multiplicity="0..1" />
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERTYPE">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="USER_INFO">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__YEUTHICH__IdBaiV__32E0915F">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="YEUTHICH" Type="Self.YEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="IdBaiViet" />
+            </Principal>
+            <Dependent Role="YEUTHICH">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__YEUTHICH__IdUser__31EC6D26">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="YEUTHICH" Type="Self.YEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="YEUTHICH">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanBartender214ModelStoreContainer">
+          <EntitySet Name="ACTIVITY_LOG" EntityType="Self.ACTIVITY_LOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BAIVIET" EntityType="Self.BAIVIET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BINHLUAN" EntityType="Self.BINHLUAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUDE" EntityType="Self.CHUDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTDonHang" EntityType="Self.CTDonHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DANHMUCSP" EntityType="Self.DANHMUCSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISCOUNTS" EntityType="Self.DISCOUNTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONHANG" EntityType="Self.DONHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIA" EntityType="Self.GIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_HISTORY" EntityType="Self.ORDER_HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_DISCOUNTS" EntityType="Self.PRODUCT_DISCOUNTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_REVIEWS" EntityType="Self.PRODUCT_REVIEWS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERTYPE" EntityType="Self.USERTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YEUTHICH" EntityType="Self.YEUTHICH" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ACTIVITY___IdUse__36B12243" Association="Self.FK__ACTIVITY___IdUse__36B12243">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="ACTIVITY_LOG" EntitySet="ACTIVITY_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__IdChuDe__29572725" Association="Self.FK__BAIVIET__IdChuDe__29572725">
+            <End Role="CHUDE" EntitySet="CHUDE" />
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__IdUser__286302EC" Association="Self.FK__BAIVIET__IdUser__286302EC">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__IdBaiV__2E1BDC42" Association="Self.FK__BINHLUAN__IdBaiV__2E1BDC42">
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__IdUser__2D27B809" Association="Self.FK__BINHLUAN__IdUser__2D27B809">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDonHang__MaDH__21B6055D" Association="Self.FK__CTDonHang__MaDH__21B6055D">
+            <End Role="DONHANG" EntitySet="DONHANG" />
+            <End Role="CTDonHang" EntitySet="CTDonHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDonHang__MaSP__22AA2996" Association="Self.FK__CTDonHang__MaSP__22AA2996">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="CTDonHang" EntitySet="CTDonHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONHANG__IdUser__1ED998B2" Association="Self.FK__DONHANG__IdUser__1ED998B2">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="DONHANG" EntitySet="DONHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GIA__MaSP__1B0907CE" Association="Self.FK__GIA__MaSP__1B0907CE">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="GIA" EntitySet="GIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_HIST__MaDH__3A81B327" Association="Self.FK__ORDER_HIST__MaDH__3A81B327">
+            <End Role="DONHANG" EntitySet="DONHANG" />
+            <End Role="ORDER_HISTORY" EntitySet="ORDER_HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_D__IdDis__3F466844" Association="Self.FK__PRODUCT_D__IdDis__3F466844">
+            <End Role="DISCOUNTS" EntitySet="DISCOUNTS" />
+            <End Role="PRODUCT_DISCOUNTS" EntitySet="PRODUCT_DISCOUNTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_DI__MaSP__403A8C7D" Association="Self.FK__PRODUCT_DI__MaSP__403A8C7D">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="PRODUCT_DISCOUNTS" EntitySet="PRODUCT_DISCOUNTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_R__IdUse__45F365D3" Association="Self.FK__PRODUCT_R__IdUse__45F365D3">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="PRODUCT_REVIEWS" EntitySet="PRODUCT_REVIEWS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_RE__MaSP__44FF419A" Association="Self.FK__PRODUCT_RE__MaSP__44FF419A">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="PRODUCT_REVIEWS" EntitySet="PRODUCT_REVIEWS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SANPHAM__MaDM__182C9B23" Association="Self.FK__SANPHAM__MaDM__182C9B23">
+            <End Role="DANHMUCSP" EntitySet="DANHMUCSP" />
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_INFO__IdTyp__1367E606" Association="Self.FK__USER_INFO__IdTyp__1367E606">
+            <End Role="USERTYPE" EntitySet="USERTYPE" />
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__YEUTHICH__IdBaiV__32E0915F" Association="Self.FK__YEUTHICH__IdBaiV__32E0915F">
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+            <End Role="YEUTHICH" EntitySet="YEUTHICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__YEUTHICH__IdUser__31EC6D26" Association="Self.FK__YEUTHICH__IdUser__31EC6D26">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="YEUTHICH" EntitySet="YEUTHICH" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanBartender214Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACTIVITY_LOG">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="IdLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="Activity" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__ACTIVITY___IdUse__36B12243" FromRole="ACTIVITY_LOG" ToRole="USER_INFO" />
+        </EntityType>
+        <EntityType Name="BAIVIET">
+          <Key>
+            <PropertyRef Name="IdBaiViet" />
+          </Key>
+          <Property Name="IdBaiViet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGianDang" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Anh" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="IdChuDe" Type="Int32" />
+          <NavigationProperty Name="CHUDE" Relationship="Self.FK__BAIVIET__IdChuDe__29572725" FromRole="BAIVIET" ToRole="CHUDE" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__BAIVIET__IdUser__286302EC" FromRole="BAIVIET" ToRole="USER_INFO" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__IdBaiV__2E1BDC42" FromRole="BAIVIET" ToRole="BINHLUAN" />
+          <NavigationProperty Name="YEUTHICHes" Relationship="Self.FK__YEUTHICH__IdBaiV__32E0915F" FromRole="BAIVIET" ToRole="YEUTHICH" />
+        </EntityType>
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="IdBinhLuan" />
+          </Key>
+          <Property Name="IdBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGianBinhLuan" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="IdBaiViet" Type="Int32" />
+          <NavigationProperty Name="BAIVIET" Relationship="Self.FK__BINHLUAN__IdBaiV__2E1BDC42" FromRole="BINHLUAN" ToRole="BAIVIET" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__BINHLUAN__IdUser__2D27B809" FromRole="BINHLUAN" ToRole="USER_INFO" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="IdChuDe" />
+          </Key>
+          <Property Name="IdChuDe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenChuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK__BAIVIET__IdChuDe__29572725" FromRole="CHUDE" ToRole="BAIVIET" />
+        </EntityType>
+        <EntityType Name="CTDonHang">
+          <Key>
+            <PropertyRef Name="MaDH" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDH" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DONHANG" Relationship="Self.FK__CTDonHang__MaDH__21B6055D" FromRole="CTDonHang" ToRole="DONHANG" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK__CTDonHang__MaSP__22AA2996" FromRole="CTDonHang" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="DANHMUCSP">
+          <Key>
+            <PropertyRef Name="MaDM" />
+          </Key>
+          <Property Name="MaDM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SANPHAMs" Relationship="Self.FK__SANPHAM__MaDM__182C9B23" FromRole="DANHMUCSP" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="DISCOUNT">
+          <Key>
+            <PropertyRef Name="IdDiscount" />
+          </Key>
+          <Property Name="IdDiscount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SANPHAMs" Relationship="Self.PRODUCT_DISCOUNTS" FromRole="DISCOUNTS" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="DONHANG">
+          <Key>
+            <PropertyRef Name="MaDH" />
+          </Key>
+          <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayDat" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayGiao" Type="DateTime" Precision="0" />
+          <Property Name="DiaChiGiaoHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DaThanhToan" Type="Boolean" />
+          <Property Name="IdUser" Type="Int32" />
+          <NavigationProperty Name="CTDonHangs" Relationship="Self.FK__CTDonHang__MaDH__21B6055D" FromRole="DONHANG" ToRole="CTDonHang" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__DONHANG__IdUser__1ED998B2" FromRole="DONHANG" ToRole="USER_INFO" />
+          <NavigationProperty Name="ORDER_HISTORY" Relationship="Self.FK__ORDER_HIST__MaDH__3A81B327" FromRole="DONHANG" ToRole="ORDER_HISTORY" />
+        </EntityType>
+        <EntityType Name="GIA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GiaBan" Type="Int32" Nullable="false" />
+          <Property Name="NgayBatDau" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaSP" Type="Int32" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK__GIA__MaSP__1B0907CE" FromRole="GIA" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="ORDER_HISTORY">
+          <Key>
+            <PropertyRef Name="IdHistory" />
+          </Key>
+          <Property Name="IdHistory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaDH" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DONHANG" Relationship="Self.FK__ORDER_HIST__MaDH__3A81B327" FromRole="ORDER_HISTORY" ToRole="DONHANG" />
+        </EntityType>
+        <EntityType Name="PRODUCT_REVIEWS">
+          <Key>
+            <PropertyRef Name="IdReview" />
+          </Key>
+          <Property Name="IdReview" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaSP" Type="Int32" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__PRODUCT_R__IdUse__45F365D3" FromRole="PRODUCT_REVIEWS" ToRole="USER_INFO" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK__PRODUCT_RE__MaSP__44FF419A" FromRole="PRODUCT_REVIEWS" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GiaGoc" Type="Int32" Nullable="false" />
+          <Property Name="SLTon" Type="Int32" Nullable="false" />
+          <Property Name="MaDM" Type="Int32" />
+          <Property Name="Anh" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CTDonHangs" Relationship="Self.FK__CTDonHang__MaSP__22AA2996" FromRole="SANPHAM" ToRole="CTDonHang" />
+          <NavigationProperty Name="DANHMUCSP" Relationship="Self.FK__SANPHAM__MaDM__182C9B23" FromRole="SANPHAM" ToRole="DANHMUCSP" />
+          <NavigationProperty Name="GIAs" Relationship="Self.FK__GIA__MaSP__1B0907CE" FromRole="SANPHAM" ToRole="GIA" />
+          <NavigationProperty Name="PRODUCT_REVIEWS" Relationship="Self.FK__PRODUCT_RE__MaSP__44FF419A" FromRole="SANPHAM" ToRole="PRODUCT_REVIEWS" />
+          <NavigationProperty Name="DISCOUNTS" Relationship="Self.PRODUCT_DISCOUNTS" FromRole="SANPHAM" ToRole="DISCOUNTS" />
+          <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USER_INFO">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" />
+          <NavigationProperty Name="ACTIVITY_LOG" Relationship="Self.FK__ACTIVITY___IdUse__36B12243" FromRole="USER_INFO" ToRole="ACTIVITY_LOG" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK__BAIVIET__IdUser__286302EC" FromRole="USER_INFO" ToRole="BAIVIET" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__IdUser__2D27B809" FromRole="USER_INFO" ToRole="BINHLUAN" />
+          <NavigationProperty Name="DONHANGs" Relationship="Self.FK__DONHANG__IdUser__1ED998B2" FromRole="USER_INFO" ToRole="DONHANG" />
+          <NavigationProperty Name="PRODUCT_REVIEWS" Relationship="Self.FK__PRODUCT_R__IdUse__45F365D3" FromRole="USER_INFO" ToRole="PRODUCT_REVIEWS" />
+          <NavigationProperty Name="USERTYPE" Relationship="Self.FK__USER_INFO__IdTyp__1367E606" FromRole="USER_INFO" ToRole="USERTYPE" />
+          <NavigationProperty Name="YEUTHICHes" Relationship="Self.FK__YEUTHICH__IdUser__31EC6D26" FromRole="USER_INFO" ToRole="YEUTHICH" />
+          <Property Name="Avatar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USERTYPE">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__USER_INFO__IdTyp__1367E606" FromRole="USERTYPE" ToRole="USER_INFO" />
+        </EntityType>
+        <EntityType Name="YEUTHICH">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdBaiViet" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="ThoiGianYeuThich" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BAIVIET" Relationship="Self.FK__YEUTHICH__IdBaiV__32E0915F" FromRole="YEUTHICH" ToRole="BAIVIET" />
+          <NavigationProperty Name="USER_INFO" Relationship="Self.FK__YEUTHICH__IdUser__31EC6D26" FromRole="YEUTHICH" ToRole="USER_INFO" />
+        </EntityType>
+        <Association Name="FK__ACTIVITY___IdUse__36B12243">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ACTIVITY_LOG" Type="Self.ACTIVITY_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="ACTIVITY_LOG">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__IdChuDe__29572725">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="IdChuDe" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="IdChuDe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__IdUser__286302EC">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__IdBaiV__2E1BDC42">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="IdBaiViet" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__YEUTHICH__IdBaiV__32E0915F">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="YEUTHICH" Type="Self.YEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="IdBaiViet" />
+            </Principal>
+            <Dependent Role="YEUTHICH">
+              <PropertyRef Name="IdBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__IdUser__2D27B809">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDonHang__MaDH__21B6055D">
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CTDonHang" Type="Self.CTDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONHANG">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="CTDonHang">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDonHang__MaSP__22AA2996">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CTDonHang" Type="Self.CTDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="CTDonHang">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SANPHAM__MaDM__182C9B23">
+          <End Role="DANHMUCSP" Type="Self.DANHMUCSP" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUCSP">
+              <PropertyRef Name="MaDM" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MaDM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONHANG__IdUser__1ED998B2">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_HIST__MaDH__3A81B327">
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ORDER_HISTORY" Type="Self.ORDER_HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONHANG">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="ORDER_HISTORY">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GIA__MaSP__1B0907CE">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GIA" Type="Self.GIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="GIA">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_R__IdUse__45F365D3">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="0..1" />
+          <End Role="PRODUCT_REVIEWS" Type="Self.PRODUCT_REVIEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="PRODUCT_REVIEWS">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCT_RE__MaSP__44FF419A">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT_REVIEWS" Type="Self.PRODUCT_REVIEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="PRODUCT_REVIEWS">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_INFO__IdTyp__1367E606">
+          <End Role="USERTYPE" Type="Self.USERTYPE" Multiplicity="0..1" />
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERTYPE">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="USER_INFO">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__YEUTHICH__IdUser__31EC6D26">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="YEUTHICH" Type="Self.YEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="YEUTHICH">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_DISCOUNTS">
+          <End Role="DISCOUNTS" Type="Self.DISCOUNT" Multiplicity="*" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QuanBartender214Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACTIVITY_LOG" EntityType="Self.ACTIVITY_LOG" />
+          <EntitySet Name="BAIVIETs" EntityType="Self.BAIVIET" />
+          <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
+          <EntitySet Name="CHUDEs" EntityType="Self.CHUDE" />
+          <EntitySet Name="CTDonHangs" EntityType="Self.CTDonHang" />
+          <EntitySet Name="DANHMUCSPs" EntityType="Self.DANHMUCSP" />
+          <EntitySet Name="DISCOUNTS" EntityType="Self.DISCOUNT" />
+          <EntitySet Name="DONHANGs" EntityType="Self.DONHANG" />
+          <EntitySet Name="GIAs" EntityType="Self.GIA" />
+          <EntitySet Name="ORDER_HISTORY" EntityType="Self.ORDER_HISTORY" />
+          <EntitySet Name="PRODUCT_REVIEWS" EntityType="Self.PRODUCT_REVIEWS" />
+          <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
+          <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" />
+          <EntitySet Name="USERTYPEs" EntityType="Self.USERTYPE" />
+          <EntitySet Name="YEUTHICHes" EntityType="Self.YEUTHICH" />
+          <AssociationSet Name="FK__ACTIVITY___IdUse__36B12243" Association="Self.FK__ACTIVITY___IdUse__36B12243">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="ACTIVITY_LOG" EntitySet="ACTIVITY_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__IdChuDe__29572725" Association="Self.FK__BAIVIET__IdChuDe__29572725">
+            <End Role="CHUDE" EntitySet="CHUDEs" />
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__IdUser__286302EC" Association="Self.FK__BAIVIET__IdUser__286302EC">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__IdBaiV__2E1BDC42" Association="Self.FK__BINHLUAN__IdBaiV__2E1BDC42">
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__YEUTHICH__IdBaiV__32E0915F" Association="Self.FK__YEUTHICH__IdBaiV__32E0915F">
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+            <End Role="YEUTHICH" EntitySet="YEUTHICHes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__IdUser__2D27B809" Association="Self.FK__BINHLUAN__IdUser__2D27B809">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDonHang__MaDH__21B6055D" Association="Self.FK__CTDonHang__MaDH__21B6055D">
+            <End Role="DONHANG" EntitySet="DONHANGs" />
+            <End Role="CTDonHang" EntitySet="CTDonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDonHang__MaSP__22AA2996" Association="Self.FK__CTDonHang__MaSP__22AA2996">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="CTDonHang" EntitySet="CTDonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SANPHAM__MaDM__182C9B23" Association="Self.FK__SANPHAM__MaDM__182C9B23">
+            <End Role="DANHMUCSP" EntitySet="DANHMUCSPs" />
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONHANG__IdUser__1ED998B2" Association="Self.FK__DONHANG__IdUser__1ED998B2">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="DONHANG" EntitySet="DONHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_HIST__MaDH__3A81B327" Association="Self.FK__ORDER_HIST__MaDH__3A81B327">
+            <End Role="DONHANG" EntitySet="DONHANGs" />
+            <End Role="ORDER_HISTORY" EntitySet="ORDER_HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GIA__MaSP__1B0907CE" Association="Self.FK__GIA__MaSP__1B0907CE">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="GIA" EntitySet="GIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_R__IdUse__45F365D3" Association="Self.FK__PRODUCT_R__IdUse__45F365D3">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="PRODUCT_REVIEWS" EntitySet="PRODUCT_REVIEWS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCT_RE__MaSP__44FF419A" Association="Self.FK__PRODUCT_RE__MaSP__44FF419A">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="PRODUCT_REVIEWS" EntitySet="PRODUCT_REVIEWS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_INFO__IdTyp__1367E606" Association="Self.FK__USER_INFO__IdTyp__1367E606">
+            <End Role="USERTYPE" EntitySet="USERTYPEs" />
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__YEUTHICH__IdUser__31EC6D26" Association="Self.FK__YEUTHICH__IdUser__31EC6D26">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="YEUTHICH" EntitySet="YEUTHICHes" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_DISCOUNTS" Association="Self.PRODUCT_DISCOUNTS">
+            <End Role="DISCOUNTS" EntitySet="DISCOUNTS" />
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="QuanBartender214Model.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanBartender214ModelStoreContainer" CdmEntityContainer="QuanBartender214Entities">
+          <EntitySetMapping Name="ACTIVITY_LOG">
+            <EntityTypeMapping TypeName="QuanBartender214Model.ACTIVITY_LOG">
+              <MappingFragment StoreEntitySet="ACTIVITY_LOG">
+                <ScalarProperty Name="IdLog" ColumnName="IdLog" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="ActivityTime" ColumnName="ActivityTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAIVIETs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.BAIVIET">
+              <MappingFragment StoreEntitySet="BAIVIET">
+                <ScalarProperty Name="IdBaiViet" ColumnName="IdBaiViet" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="ThoiGianDang" ColumnName="ThoiGianDang" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdChuDe" ColumnName="IdChuDe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BINHLUANs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.BINHLUAN">
+              <MappingFragment StoreEntitySet="BINHLUAN">
+                <ScalarProperty Name="IdBinhLuan" ColumnName="IdBinhLuan" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="ThoiGianBinhLuan" ColumnName="ThoiGianBinhLuan" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdBaiViet" ColumnName="IdBaiViet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUDEs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.CHUDE">
+              <MappingFragment StoreEntitySet="CHUDE">
+                <ScalarProperty Name="IdChuDe" ColumnName="IdChuDe" />
+                <ScalarProperty Name="TenChuDe" ColumnName="TenChuDe" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTDonHangs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.CTDonHang">
+              <MappingFragment StoreEntitySet="CTDonHang">
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DANHMUCSPs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.DANHMUCSP">
+              <MappingFragment StoreEntitySet="DANHMUCSP">
+                <ScalarProperty Name="MaDM" ColumnName="MaDM" />
+                <ScalarProperty Name="TenDM" ColumnName="TenDM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCOUNTS">
+            <EntityTypeMapping TypeName="QuanBartender214Model.DISCOUNT">
+              <MappingFragment StoreEntitySet="DISCOUNTS">
+                <ScalarProperty Name="IdDiscount" ColumnName="IdDiscount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONHANGs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.DONHANG">
+              <MappingFragment StoreEntitySet="DONHANG">
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
+                <ScalarProperty Name="DiaChiGiaoHang" ColumnName="DiaChiGiaoHang" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIAs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.GIA">
+              <MappingFragment StoreEntitySet="GIA">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_HISTORY">
+            <EntityTypeMapping TypeName="QuanBartender214Model.ORDER_HISTORY">
+              <MappingFragment StoreEntitySet="ORDER_HISTORY">
+                <ScalarProperty Name="IdHistory" ColumnName="IdHistory" />
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_REVIEWS">
+            <EntityTypeMapping TypeName="QuanBartender214Model.PRODUCT_REVIEWS">
+              <MappingFragment StoreEntitySet="PRODUCT_REVIEWS">
+                <ScalarProperty Name="IdReview" ColumnName="IdReview" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANPHAMs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.SANPHAM">
+              <MappingFragment StoreEntitySet="SANPHAM">
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="GiaGoc" ColumnName="GiaGoc" />
+                <ScalarProperty Name="SLTon" ColumnName="SLTon" />
+                <ScalarProperty Name="MaDM" ColumnName="MaDM" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_INFO">
+            <EntityTypeMapping TypeName="QuanBartender214Model.USER_INFO">
+              <MappingFragment StoreEntitySet="USER_INFO">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERTYPEs">
+            <EntityTypeMapping TypeName="QuanBartender214Model.USERTYPE">
+              <MappingFragment StoreEntitySet="USERTYPE">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YEUTHICHes">
+            <EntityTypeMapping TypeName="QuanBartender214Model.YEUTHICH">
+              <MappingFragment StoreEntitySet="YEUTHICH">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdBaiViet" ColumnName="IdBaiViet" />
+                <ScalarProperty Name="ThoiGianYeuThich" ColumnName="ThoiGianYeuThich" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PRODUCT_DISCOUNTS" TypeName="QuanBartender214Model.PRODUCT_DISCOUNTS" StoreEntitySet="PRODUCT_DISCOUNTS">
+            <EndProperty Name="DISCOUNTS">
+              <ScalarProperty Name="IdDiscount" ColumnName="IdDiscount" />
+            </EndProperty>
+            <EndProperty Name="SANPHAM">
+              <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QuanBartender214Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

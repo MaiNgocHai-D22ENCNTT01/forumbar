@@ -1,0 +1,50 @@
+﻿@model forumbar.Models.BAIVIET
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết bài viết</h2>
+
+<div class="form-group">
+    <label for="TieuDe">Tiêu đề</label>
+    <p>@Model.TieuDe</p>
+</div>
+<div class="form-group">
+    <label for="NoiDung">Nội dung</label>
+    <p>@Model.NoiDung</p>
+</div>
+<div class="form-group">
+    <label for="IdChuDe">Chủ đề</label>
+    <p>@Model.CHUDE.TenChuDe</p>
+</div>
+<div class="form-group">
+    <label for="IdUser">Tác giả</label>
+    <p>@Model.USER_INFO.UserName</p>
+</div>
+<div class="form-group">
+    <label for="ThoiGianDang">Ngày đăng</label>
+    <p>@Model.ThoiGianDang.ToString("dd/MM/yyyy HH:mm:ss")</p>
+</div>
+
+<div class="form-group">
+    @if (!string.IsNullOrEmpty(Model.Anh))
+    {
+        <img src="@Url.Content("~/Images/" + Model.Anh)" alt="Hình ảnh bài viết" class="img-fluid" />
+    }
+    else
+    {
+        <p>Không có hình ảnh cho bài viết này.</p>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Quay lại", "Index", new { area = "Admin" }, new { @class = "btn btn-default" })
+</p>
+
+<!-- Nút Chỉnh sửa và Xóa -->
+<p>
+  
+    @Html.ActionLink("Xóa", "Delete", "BaiViet", new { area = "Admin", id = Model.IdBaiViet }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bạn có chắc chắn muốn xóa bài viết này?')" })
+</p>

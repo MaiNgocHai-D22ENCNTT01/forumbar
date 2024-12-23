@@ -1,0 +1,33 @@
+﻿@model forumbar.Models.BAIVIET
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group">
+    <label for="TieuDe">Tiêu đề</label>
+    <p>@Model.TieuDe</p>
+</div>
+<div class="form-group">
+    <label for="NoiDung">Nội dung</label>
+    <p>@Model.NoiDung</p>
+</div>
+<div class="form-group">
+    <label for="IdChuDe">Chủ đề</label>
+    <p>@Model.CHUDE.TenChuDe</p>
+</div>
+<div class="form-group">
+    <label for="IdUser">Tác giả</label>
+    <p>@Model.USER_INFO.UserName</p>
+</div>
+
+<p>
+    <strong>Bạn có chắc chắn muốn xóa bài viết này?</strong>
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    @Html.ActionLink("Quay lại", "Index", new { area = "Admin" }, new { @class = "btn btn-default" })
+}

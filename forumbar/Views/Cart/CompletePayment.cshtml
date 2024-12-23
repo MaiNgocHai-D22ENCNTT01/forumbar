@@ -1,0 +1,51 @@
+﻿@model List<Bartender212.Controllers.CartController.GioHangItem>
+@{
+    ViewBag.Title = "CompletePayment";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+
+<h2>CompletePayment</h2>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenSP</td>
+                <td>@item.SoLuong</td>
+                <td>@item.Gia.ToString("N0") VNĐ</td>
+                <td>@item.ThanhTien.ToString("N0") VNĐ</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Tổng tiền: @Model.Sum(item => item.ThanhTien).ToString("N0") VNĐ</h3>
+
+<div>
+    <h4>Chọn phương thức thanh toán:</h4>
+    <form method="get" action="@Url.Action("CompletePayment", "Cart")">
+        <button type="submit" name="paymentMethod" value="cash" class="btn btn-success">Thanh toán tiền mặt</button>
+        <button type="submit" name="paymentMethod" value="qr" class="btn btn-info">Thanh toán QR</button>
+    </form>
+</div>
+
+@if (ViewBag.QRCodeUrl != null)
+{
+    <div>
+        <h4>Mã QR thanh toán:</h4>
+        <img src="@Url.Content(ViewBag.QRCodeUrl)" alt="QR Code" style="width:100px; height:100px;" />
+    </div>
+}
+
+<a href="@Url.Action("Index", "Cart")" class="btn btn-secondary">Quay lại giỏ hàng</a>

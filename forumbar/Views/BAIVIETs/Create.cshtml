@@ -1,0 +1,59 @@
+﻿@model forumbar.Models.BAIVIET
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<header>
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+</header>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+    <div class="col-md-9">
+        <!-- Adjust width with col-md-* -->
+        @using (Html.BeginForm("Create", "BAIVIETs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal bg-light p-4 rounded shadow">
+                <h4 class="text-center mb-4">ADD POST</h4>
+                <hr />
+
+                <div class="form-group mb-3">
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Enter Title" } })
+                        @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", rows = 5, required = "required", placeholder = "Enter Content", id = "editor" })
+                        @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="col-md-12">
+                        @Html.DropDownList("IdChuDe", null, "-- Select Topic --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdChuDe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="col-md-12">
+                        <input type="file" name="AnhFile" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button class="mtr-btn signip" type="submit"><span>Create Post</span></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>

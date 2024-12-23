@@ -1,0 +1,88 @@
+﻿@model List<Bartender212.Controllers.CartController.GioHangItem>
+
+@{
+    ViewBag.Title = "Thanh Toán";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 class="text-center my-4">Thanh Toán</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container">
+        <h4 class="text-start">Địa chỉ giao hàng: @ViewBag.Address</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.TenSP</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.Gia.ToString("N0") VNĐ</td>
+                        <td>@item.ThanhTien.ToString("N0") VNĐ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form action="@Url.Action("CompletePayment", "Cart")" method="post")>
+            <div class="mb-3">
+                <label for="address" class="form-label">Địa chỉ nhận hàng:</label>
+                <input type="text" id="address" name="address" class="form-control" value="@ViewBag.Address" required />
+            </div>
+
+
+            <div>
+                <label for="paymentMethod" class="form-label">Chọn phương thức thanh toán:</label>
+                <select id="paymentMethod" class="form-select" name="paymentMethod" onchange="togglePaymentMethod()">
+                    <option value="cash">Thanh toán tiền mặt</option>
+                    <option value="qr">Thanh toán chuyển khoảng</option>
+                </select>
+            </div>
+
+            <div id="qrSection" style="display: none; margin-top: 20px;">
+                <img id="qrImage" src="" alt="QR Code" class="img-fluid" style="width: 500px; height: auto;" />
+                <p>Quét mã này bằng MoMo hoặc PayPal để thanh toán.</p>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check-circle"></i> Xác nhận thanh toán
+                </button>
+            </div>
+
+            <div id="cashSection" style="display: none; margin-top: 20px;">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check-circle"></i> Xác nhận thanh toán
+                </button>
+            </div>
+        </form>
+    </div>
+}
+<script>
+    function togglePaymentMethod() {
+        var method = document.getElementById("paymentMethod").value;
+        document.getElementById("qrSection").style.display = (method === "qr") ? "block" : "none";
+        document.getElementById("cashSection").style.display = (method === "cash") ? "block" : "none";
+
+        if (method === "qr") {
+            // Gọi API để lấy URL mã QR
+            var totalAmount = @Model.Sum(item => item.ThanhTien);
+            $.ajax({
+                url: '@Url.Action("CompletePayment", "Cart")',
+                type: 'POST',
+                data: { paymentMethod: 'qr' },
+                success: function (data) {
+                    if (data.success) {
+                        // Hiển thị mã QR
+                        document.getElementById("qrImage").src = data.qrCodeUrl;
+                    }
+                }
+            });
+        }
+    }
+</script>

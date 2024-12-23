@@ -1,0 +1,24 @@
+﻿@model forumbar.Models.CHUDE
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tạo chủ đề mới</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TenChuDe)
+        @Html.TextBoxFor(m => m.TenChuDe, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MoTa)
+        @Html.TextAreaFor(m => m.MoTa, new { @class = "form-control", rows = 3 })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Tạo chủ đề</button>
+}
+

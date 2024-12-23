@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<forumbar.Models.SANPHAM>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Sản phẩm theo danh mục";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<h2 class>Sản phẩm theo danh mục</h2>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="thumbnail">
+                <!-- Hình ảnh sản phẩm -->
+                <a href="@Url.Action("Details", "Bartender", new { id = product.MaSP })">
+                    <img src="@Url.Content("~/images/" + product.Anh)"
+                         class="img-responsive product-image"
+                         alt="@product.TenSP"
+                         onerror="this.onerror=null; this.src='@Url.Content("~/images/default-product.jpg")';">
+                </a>
+                <div class="caption text-center">
+                    <!-- Tên sản phẩm -->
+                    <h5>
+                        <a href="@Url.Action("Details", "Bartender", new { id = product.MaSP })" class="text-decoration-none">@product.TenSP</a>
+                    </h5>
+                    <!-- Giá sản phẩm -->
+                    <p class="text-danger fw-bold mb-2">@product.GiaGoc.ToString("N0") VNĐ</p>
+                    <!-- Số lượng tồn -->
+                    <p class="text-muted mb-2">Còn lại: @product.SLTon</p> <!-- Hiển thị số lượng tồn -->
+                    <!-- Nút thêm vào giỏ hàng -->
+                    <form action="/Cart/AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@product.MaSP" />
+                        <button type="submit" class="btn btn-primary btn-sm" @(product.SLTon <= 0 ? "disabled" : "")>
+                            <i class="glyphicon glyphicon-shopping-cart"></i> Thêm vào giỏ hàng
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="text-center mt-4">
+        @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                DisplayPageCountAndCurrentLocation = true,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                UlElementClasses = new[] { "pagination", "justify-content-center" }
+            })
+    </div>
+</div>
+<!-- CSS cho ảnh sản phẩm -->
+<style>
+    .product-image {
+        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của khung */
+        height: 200px; /* Chỉnh chiều cao ảnh để đồng đều */
+        object-fit: cover; /* Cắt ảnh theo tỷ lệ mà không bị méo */
+        border-radius: 8px; /* Bo góc ảnh nếu cần */
+    }
+</style>

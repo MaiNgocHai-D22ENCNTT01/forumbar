@@ -1,0 +1,22 @@
+﻿@model forumbar.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Product</h2>
+
+<div class="alert alert-danger">
+    <strong>Warning!</strong> Are you sure you want to delete the product: <b>@Model.TenSP</b>?
+</div>
+
+<!-- Form xác nhận xóa -->
+@using (Html.BeginForm("DeleteConfirmed", "SANPHAMs", new { id = Model.MaSP }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+    </div>
+}
